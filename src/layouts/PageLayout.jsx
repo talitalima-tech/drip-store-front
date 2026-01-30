@@ -1,15 +1,20 @@
-import { Outlet } from "react-router-dom";
-import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
-const PageLayout = () => {
-    return ( 
-        <>
-            <Header />
-            <Outlet />
-            <Footer />
-        </>
-     );
-}
- 
-export default PageLayout;
+// Definindo o componente de layout
+const Layout = ({ children }) => {
+  return (
+    <div>
+      {/* Componente do cabeçalho */}
+      <Header />
+
+      {/* Conteúdo dinâmico das páginas */}
+      {children}
+
+      {/* Componente do rodapé */}
+      <Footer />
+    </div>
+  );
+};
+
+export default Layout;

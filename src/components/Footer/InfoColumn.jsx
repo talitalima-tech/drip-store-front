@@ -1,47 +1,50 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-/* Título da coluna */
-const Title = styled.h4`
-  font-size: 18px;
-  margin-bottom: 16px;
+const Column = styled.div`
+  color: #cccccc;
+  font-size: 16px;
 `;
 
-/* Lista de links */
+const Title = styled.h3`
+  color: #ffffff; 
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+`;
+
 const List = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
 `;
 
-/* Item da lista */
 const ListItem = styled.li`
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+`;
 
-  a {
-    color: #cccccc;
-    text-decoration: none;
-    font-size: 14px;
+const Link = styled.a`
+  text-decoration: none;
+  color: #cccccc;
+  line-height: 26px;
 
-    &:hover {
-      color: white;
-    }
+  &:hover {
+    color: #ffffff;
   }
 `;
 
 const InfoColumn = ({ title, informations }) => {
   return (
-    <div>
+    <Column>
       <Title>{title}</Title>
 
       <List>
         {informations.map((item, index) => (
           <ListItem key={index}>
-            <Link to={item.link}>{item.text}</Link>
+            <Link href={item.link}>{item.text}</Link>
           </ListItem>
         ))}
       </List>
-    </div>
+    </Column>
   );
 };
 

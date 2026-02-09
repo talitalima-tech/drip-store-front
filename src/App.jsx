@@ -10,7 +10,6 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Footer />
-    
     </BrowserRouter>
   );
 }

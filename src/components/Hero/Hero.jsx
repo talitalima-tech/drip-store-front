@@ -7,6 +7,63 @@ import sneakerImage from '../../assets/White-Sneakers-PNG.png';
 import fireIcon from '../../assets/fire.png';
 import dotsImage from '../../assets/dots.png';
 
+const Hero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    { desc: 'Descontos imperdíveis em tênis Nike para você renovar seu estilo com conforto e tecnologia.' },
+    { desc: 'Aproveite as melhores ofertas da semana com frete grátis para todo o Brasil em compras Nike.' },
+    { desc: 'Conheça a nova coleção Air Max com preços exclusivos que você só encontra aqui na Digital Store.' }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 2000); // Muda a cada 2 segundos
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  return (
+    <HeroWrapper>
+      <Content>
+        <TextContent>
+          <span className="subtitle">Melhores ofertas personalizadas</span>
+          <h1>
+            Queima de <br />
+            estoque Nike 
+            <img src={fireIcon} alt="Fogo" className="fire-img" />
+          </h1>
+
+          <p className="desc" key={currentSlide}>
+            {slides[currentSlide].desc}
+          </p>
+          
+          <button>Ver Ofertas</button>
+        </TextContent>
+
+        <ImageContainer>
+          <img src={sneakerImage} className="sneaker" alt="Tênis Nike" />
+          <img src={dotsImage} className="dots" alt="Pontos decorativos" />
+        </ImageContainer>
+      </Content>
+
+      <DotsContainer>
+        {slides.map((_, index) => (
+          <Dot 
+            key={index} 
+            $active={index === currentSlide} 
+            onClick={() => setCurrentSlide(index)}
+            aria-label={`Ir para slide ${index + 1}`}
+          />
+        ))}
+      </DotsContainer>
+    </HeroWrapper>
+  );
+};
+
+export default Hero;
+
+// Estilos para o Hero
 const HeroWrapper = styled.section`
   position: relative;
   width: 100%;
@@ -124,58 +181,3 @@ const Dot = styled.button`
   cursor: pointer;
 `;
 
-const Hero = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const slides = [
-    { desc: 'Descontos imperdíveis em tênis Nike para você renovar seu estilo com conforto e tecnologia.' },
-    { desc: 'Aproveite as melhores ofertas da semana com frete grátis para todo o Brasil em compras Nike.' },
-    { desc: 'Conheça a nova coleção Air Max com preços exclusivos que você só encontra aqui na Digital Store.' }
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 2000); // Muda a cada 2 segundos
-    return () => clearInterval(interval);
-  }, [slides.length]);
-
-  return (
-    <HeroWrapper>
-      <Content>
-        <TextContent>
-          <span className="subtitle">Melhores ofertas personalizadas</span>
-          <h1>
-            Queima de <br />
-            estoque Nike 
-            <img src={fireIcon} alt="Fogo" className="fire-img" />
-          </h1>
-
-          <p className="desc" key={currentSlide}>
-            {slides[currentSlide].desc}
-          </p>
-          
-          <button>Ver Ofertas</button>
-        </TextContent>
-
-        <ImageContainer>
-          <img src={sneakerImage} className="sneaker" alt="Tênis Nike" />
-          <img src={dotsImage} className="dots" alt="Pontos decorativos" />
-        </ImageContainer>
-      </Content>
-
-      <DotsContainer>
-        {slides.map((_, index) => (
-          <Dot 
-            key={index} 
-            $active={index === currentSlide} 
-            onClick={() => setCurrentSlide(index)}
-            aria-label={`Ir para slide ${index + 1}`}
-          />
-        ))}
-      </DotsContainer>
-    </HeroWrapper>
-  );
-};
-
-export default Hero;

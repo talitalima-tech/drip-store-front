@@ -3,6 +3,9 @@ import styled from "styled-components";
 const Column = styled.div`
   color: #cccccc;
   font-size: 16px;
+  @media (max-width: 768px) {
+    text-align: center; /* Centraliza o título e os links no celular */
+  }
 `;
 
 const Title = styled.h3`

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'; // Importante para o link rosa
+import { Link } from 'react-router-dom'; 
 import Layout from "../../Layouts/Layout";
 import Section from "../../components/Section/Section";
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
@@ -9,59 +9,6 @@ import ProductListing from "../../components/ProductListing/ProductListing";
 import { theme } from "../../styles/theme";
 import Hero from "../../components/Hero/Hero";
 import { PRODUCTS, HOME_SLIDES, COLLECTIONS } from "../../data/db";
-
-const HomePage = () => {
-  return (
-    <Layout>
-      <HomeWrapper>
-        <Hero slides={HOME_SLIDES} />
-
-        <Content>
-          {/* 1. Coleções em destaque (Cards com Botão) */}
-          <Section>
-            <TitleContainer>
-              <h2>Coleções em destaque</h2>
-            </TitleContainer>
-            <BannerGrid>
-              {COLLECTIONS.map((col, i) => (
-                <CollectionCard key={i}>
-                  {/* 1. Fica apenas o selo de desconto */}
-                  <span className="badge">30% OFF</span>
-                  
-                  {/* 2. O botão de comprar (Sem o texto da categoria no meio) */}
-                  <button>Comprar</button>
-                  
-                  {/* 3. A imagem de fundo */}
-                  <img src={col.image} alt="Coleção" />
-                </CollectionCard>
-              ))}
-            </BannerGrid>
-          </Section>
-
-          {/* 2. Categorias (Ícones centralizados) */}
-          <Section title="Categorias em destaque" titleAlign="center">
-            <CategoryGrid />
-          </Section>
-
-          {/* 3. Produtos em Alta (Com link rosa) */}
-          <Section>
-            <TitleContainer>
-              <h2>Produtos em alta</h2>
-              <ViewAllLink to="/produtos">
-                Ver todos <span>&rarr;</span>
-              </ViewAllLink>
-            </TitleContainer>
-            <ProductListing products={PRODUCTS.slice(0, 8)} />
-          </Section>
-        </Content>
-
-        <SpecialOffer />
-      </HomeWrapper>
-    </Layout>
-  );
-};
-
-export default HomePage;
 
 //Estilos para a HomePage
 
@@ -177,4 +124,58 @@ const TitleContainer = styled.div`
     font-weight: 700;
   }
 `;
+
+//componentes da home page
+const HomePage = () => {
+  return (
+    <Layout>
+      <HomeWrapper>
+        <Hero slides={HOME_SLIDES} />
+
+        <Content>
+          {/* 1. Coleções em destaque (Cards com Botão) */}
+          <Section>
+            <TitleContainer>
+              <h2>Coleções em destaque</h2>
+            </TitleContainer>
+            <BannerGrid>
+              {COLLECTIONS.map((col, i) => (
+                <CollectionCard key={i}>
+                  {/* 1. Fica apenas o selo de desconto */}
+                  <span className="badge">30% OFF</span>
+                  
+                  {/* 2. O botão de comprar (Sem o texto da categoria no meio) */}
+                  <button>Comprar</button>
+                  
+                  {/* 3. A imagem de fundo */}
+                  <img src={col.image} alt="Coleção" />
+                </CollectionCard>
+              ))}
+            </BannerGrid>
+          </Section>
+
+          {/* 2. Categorias (Ícones centralizados) */}
+          <Section title="Categorias em destaque" titleAlign="center">
+            <CategoryGrid />
+          </Section>
+
+          {/* 3. Produtos em Alta (Com link rosa) */}
+          <Section>
+            <TitleContainer>
+              <h2>Produtos em alta</h2>
+              <ViewAllLink to="/produtos">
+                Ver todos <span>&rarr;</span>
+              </ViewAllLink>
+            </TitleContainer>
+            <ProductListing products={PRODUCTS.slice(0, 8)} />
+          </Section>
+        </Content>
+
+        <SpecialOffer />
+      </HomeWrapper>
+    </Layout>
+  );
+};
+
+export default HomePage;
 

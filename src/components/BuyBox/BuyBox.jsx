@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import StarRating from "../StarRating/StarRating";
 //Estilo do buybox
 const Container = styled.div`
   display: flex;
@@ -90,20 +91,15 @@ const BuyButton = styled.button`
     width: 100%; /* No mobile ele fica gigante para facilitar o clique */
   }
 `;
+
 // Componente BuyBox
 const BuyBox = ({ name, reference, stars, rating, price, priceDiscount, description, children }) => {
   return (
     <Container>
       <Name>{name}</Name>
       <Reference>Ref:{reference}</Reference>
-      
-      <RatingContainer>
-        <div className="stars">
-          {stars} 
-          <img src="/src/assets/star-icon.svg" alt="estrela" />
-        </div>
-        <span className="rating-total">({rating} avaliações)</span>
-      </RatingContainer>
+
+      <StarRating rating={stars} totalReviews={rating} />
 
       <PriceWrapper>
         {priceDiscount ? (

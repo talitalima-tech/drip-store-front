@@ -6,27 +6,43 @@ import ProductOptions from "../../components/ProductOptions/ProductOptions";
 import Section from "../../components/Section/Section";
 import ProductListing from "../../components/ProductListing/ProductListing";
 import sneakerImage from '../../assets/White-Sneakers-PNG.png';
-
-const MainContent = styled.main`
-  padding: 40px 100px;
-  background-color: #F5F5F5;
+//Estilos para a página de visualização do produto (ProductViewPage)
+const Breadcrumbs = styled.div`
+  font-size: 14px;
+  color: #474747;
+  margin-bottom: 20px;
+  span { font-weight: bold; }
 `;
 
 const ProductFlex = styled.div`
   display: flex;
   gap: 40px;
   margin-bottom: 80px;
+
+  @media (max-width: 992px) {
+    flex-direction: column; /* Empilha Galeria e BuyBox no mobile */
+    gap: 20px;
+  }
+`;
+
+const MainContent = styled.main`
+  padding: 40px 104px; /* Ajustado para bater com o padding do Header/Footer */
+  background-color: #F5F5F5;
+
+  @media (max-width: 768px) {
+    padding: 20px; 
+  }
 `;
 
 const ProductViewPage = () => {
-  // Dados simulados para a galeria (Requisito 7.1)
+  // Dados simulados para a galeria 
   const productImages = [
     { src: sneakerImage },
     { src: sneakerImage },
     { src: sneakerImage},
   ];
 
-  // Dados para produtos recomendados (Requisito 7.4)
+  // Dados para produtos recomendados
   const recommendedProducts = [
     { name: "K-Swiss V8 - Masculino", image: "/product-placeholder.png", price: 200, priceDiscount: 149.9 },
     { name: "K-Swiss V8 - Feminino", image: "/product-placeholder.png", price: 49.9 },
@@ -38,8 +54,10 @@ const ProductViewPage = () => {
     <Layout>
       <MainContent>
         {/* PARTE SUPERIOR: Galeria e Informações */}
+        <Breadcrumbs>
+          Home / Produtos / Tênis / Nike / Tênis Nike Revolution 6 Next Nature Masculino
+        </Breadcrumbs>
         <ProductFlex>
-          {/* 7.1 - Galeria com dimensões fixas */}
           <Gallery 
             images={productImages} 
             showThumbs 
@@ -48,17 +66,16 @@ const ProductViewPage = () => {
             radius="4px" 
           />
 
-          {/* 7.3 - BuyBox (As informações do produto) */}
           <BuyBox 
             name="Tênis Nike Revolution 6 Next Nature Masculino"
-            reference="837462"
+            reference="38416711 | Casual | Nike "
             stars="4.7"
             rating="90"
-            price={200}
-            priceDiscount={149.9}
+            price={250}
+            priceDiscount={219}
             description="O Tênis Nike Revolution 6 Next Nature Masculino é a escolha perfeita para corredores que buscam conforto e sustentabilidade. Com amortecimento macio e design moderno."
           >
-            {/* 7.2 - ProductOptions inseridos como filhos (children) */}
+            
             <h5 style={{ color: '#8F8F8F', marginBottom: '10px' }}>Tamanho</h5>
             <ProductOptions 
               options={["39", "40", "41", "42", "43"]} 
@@ -69,7 +86,7 @@ const ProductViewPage = () => {
 
             <h5 style={{ color: '#8F8F8F', marginBottom: '10px', marginTop: '20px' }}>Cores</h5>
             <ProductOptions 
-              options={["#6FEE8D", "#FF6969", "#5E5E5E", "#6D70B7"]} 
+              options={["rgba(111, 238, 255, 1)", "rgba(255, 105, 105, 1)", "rgba(94, 94, 94, 1)", "rgba(109, 112, 183, 1)"]} 
               shape="circle" 
               type="color" 
             />

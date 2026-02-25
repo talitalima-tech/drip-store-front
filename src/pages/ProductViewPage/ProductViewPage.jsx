@@ -6,6 +6,8 @@ import ProductOptions from "../../components/ProductOptions/ProductOptions";
 import Section from "../../components/Section/Section";
 import ProductListing from "../../components/ProductListing/ProductListing";
 import sneakerImage from '../../assets/White-Sneakers-PNG.png';
+import React, { useEffect } from 'react'; // Adicione o useEffect aqui
+import { useParams } from 'react-router-dom';
 //Estilos para a página de visualização do produto (ProductViewPage)
 const Breadcrumbs = styled.div`
   font-size: 14px;
@@ -26,7 +28,7 @@ const ProductFlex = styled.div`
 `;
 
 const MainContent = styled.main`
-  padding: 40px 104px; /* Ajustado para bater com o padding do Header/Footer */
+  padding: 40px 104px; 
   background-color: #F5F5F5;
 
   @media (max-width: 768px) {
@@ -35,6 +37,12 @@ const MainContent = styled.main`
 `;
 
 const ProductViewPage = () => {
+  const { id } = useParams(); // Pega o ID da URL
+
+  // Faz a página subir ao topo sempre que mudar de produto
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
   // Dados simulados para a galeria 
   const productImages = [
     { src: sneakerImage },
@@ -44,10 +52,10 @@ const ProductViewPage = () => {
 
   // Dados para produtos recomendados
   const recommendedProducts = [
-    { name: "K-Swiss V8 - Masculino", image: "/product-placeholder.png", price: 200, priceDiscount: 149.9 },
-    { name: "K-Swiss V8 - Feminino", image: "/product-placeholder.png", price: 49.9 },
-    { name: "K-Swiss V8 - Feminino", image: "/product-placeholder.png", price: 49.9 },
-    { name: "Tênis Casual", image: "/product-placeholder.png", price: 299 },
+    { id: 1, name: "K-Swiss V8 - Masculino", image: "/product-placeholder.png", price: 200, priceDiscount: 149.9 },
+    { id: 2, name: "K-Swiss V8 - Feminino", image: "/product-placeholder.png", price: 49.9 },
+    { id: 3, name: "K-Swiss V8 - Feminino", image: "/product-placeholder.png", price: 49.9 },
+    { id: 4, name: "Tênis Casual", image: "/product-placeholder.png", price: 299 },
   ];
 
   return (
@@ -93,7 +101,7 @@ const ProductViewPage = () => {
           </BuyBox>
         </ProductFlex>
 
-        {/* 7.4 - Seção de Produtos Recomendados */}
+        {/* Seção de Produtos Recomendados */}
         <Section 
           title="Produtos recomendados" 
           titleAlign="left"

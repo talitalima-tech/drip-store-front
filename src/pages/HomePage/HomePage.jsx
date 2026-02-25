@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'; // Importante para o link rosa
+import { Link } from 'react-router-dom'; 
 import Layout from "../../Layouts/Layout";
 import Section from "../../components/Section/Section";
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
@@ -9,6 +9,8 @@ import ProductListing from "../../components/ProductListing/ProductListing";
 import { theme } from "../../styles/theme";
 import Hero from "../../components/Hero/Hero";
 import { PRODUCTS, HOME_SLIDES, COLLECTIONS } from "../../data/db";
+
+//Estilos para a HomePage
 
 const HomeWrapper = styled.main`
   display: flex;
@@ -24,9 +26,6 @@ const Content = styled.div`
   padding: 0 104px;
   width: 100%;
 `;
-
-// Novo Card para as Coleções (3 fotos)
-// Atualize esses Styled Components no seu HomePage.jsx
 
 const CollectionCard = styled.div`
   position: relative;
@@ -126,6 +125,7 @@ const TitleContainer = styled.div`
   }
 `;
 
+//componentes da home page
 const HomePage = () => {
   return (
     <Layout>
@@ -178,3 +178,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

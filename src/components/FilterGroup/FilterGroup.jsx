@@ -22,8 +22,7 @@ const Option = styled.div`
     width: 22px;
     height: 22px;
     cursor: pointer;
-    /* No CSS puro usamos accent-color para mudar a cor do checkbox */
-    accent-color: #C92071; /* Cor primary (Rosa) */
+    accent-color: #C92071; 
   }
 
   label {

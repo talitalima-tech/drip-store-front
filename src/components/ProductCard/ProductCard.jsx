@@ -1,27 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { useNavigate } from 'react-router-dom'; 
 
-// 1. Container Principal
+//Container Principal
 const CardContainer = styled.div`
-  width: 100%; /* Ocupa o espaço do grid */
-  max-width: 292px; /* Limite do Figma */
+  width: 100%; 
+  max-width: 292px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  cursor: pointer;
+  cursor: pointer; 
 
   @media (max-width: 600px) {
-    max-width: 100%; /* Garante que 2 caibam lado a lado */
+    max-width: 100%;
   }
 `;
 
-// 2. O Wrapper cinza da imagem (321px de altura)
+//O Wrapper cinza da imagem
 const ImageWrapper = styled.div`
   width: 100%;
   height: 321px;
   background-color: #F5F5F5;
-  border-radius: 4px; /* Medida do Figma */
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,20 +30,19 @@ const ImageWrapper = styled.div`
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
 
   @media (max-width: 600px) {
-    height: 180px; /* Altura reduzida para telas pequenas */
+    height: 180px; 
   }
 `;
 
-// 3. A Imagem com a rotação de 30 graus
 const ProductImage = styled.img`
-  width: 248px;  /* Medida do Figma */
-  height: 134px; /* Medida do Figma */
+  width: 248px; 
+  height: 134px; 
   object-fit: contain;
   transform: rotate(-30deg); 
   transition: transform 0.3s ease;
 
   ${CardContainer}:hover & {
-    transform: rotate(-30deg) scale(1.1); /* Zoom leve no hover */
+    transform: rotate(-30deg) scale(1.1);
   }
 
   @media (max-width: 600px) {
@@ -56,7 +55,6 @@ const Name = styled.div`
   font-size: 16px;
   color: #474747;
   font-weight: 400;
-  /* Se houver tema: font-family: ${theme.typography?.fontFamily || 'inherit'}; */
 `;
 
 const PriceRow = styled.div`
@@ -85,14 +83,24 @@ const PriceStriked = styled.div`
   }
 `;
 
-export default function ProductCard({ image, name, price, priceDiscount }) {
+const ProductCard = ({ id, image, name, price, priceDiscount }) => {
+  const navigate = useNavigate();
+
+  const handleProductClick = () => {
+    
+    navigate(`/produtos/${id}`);
+    
+    // Opcional: Garante que a página nova abra no topo do scroll
+    window.scrollTo(0, 0);
+  };
+
   const formatBRL = (value) =>
     typeof value === 'number'
       ? value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
       : value;
 
   return (
-    <CardContainer>
+    <CardContainer onClick={handleProductClick}>
       <ImageWrapper>
         <ProductImage src={image} alt={name} />
       </ImageWrapper>
@@ -109,4 +117,6 @@ export default function ProductCard({ image, name, price, priceDiscount }) {
       )}
     </CardContainer>
   );
-}
+};
+
+export default ProductCard;

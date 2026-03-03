@@ -11,7 +11,6 @@ import Hero from "../../components/Hero/Hero";
 import { PRODUCTS, HOME_SLIDES, COLLECTIONS } from "../../data/db";
 
 //Estilos para a HomePage
-
 const HomeWrapper = styled.main`
   display: flex;
   flex-direction: column;
@@ -36,8 +35,14 @@ const CollectionCard = styled.div`
   padding: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Garante espaço entre topo e base */
+  justify-content: space-between; 
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 100%;   
+    flex: none;     
+    height: 220px; 
+  }
 
   .badge {
     background-color: #E7FF86;
@@ -59,10 +64,13 @@ const CollectionCard = styled.div`
     z-index: 2;
     max-width: 160px;
     line-height: 1.2;
+
+    @media (max-width: 480px) {
+      font-size: 24px;
+    }
   }
 
   button {
-    /* Dados exatos do Figma para o Botão */
     width: 153px;
     height: 48px;
     background-color: #F5F5F5;
@@ -73,7 +81,7 @@ const CollectionCard = styled.div`
     font-size: 16px;
     cursor: pointer;
     z-index: 2;
-    margin-top: auto; /* Empurra o botão para a base do card */
+    margin-top: auto; 
     transition: 0.2s;
     
     &:hover {
@@ -86,17 +94,26 @@ const CollectionCard = styled.div`
     position: absolute;
     right: 0;
     bottom: 0;
-    height: 100%; /* Ajusta a imagem ao tamanho do card */
+    height: 100%;
     z-index: 1;
     object-fit: contain;
+
+    @media (max-width: 768px) {
+      height: 90%; /* Diminui um pouco a imagem para dar respiro */
+    }
   }
 `;
 
 const BannerGrid = styled.div`
   display: flex;
-  gap: 20px; /* Gap entre os cards */
+  gap: 20px; 
   margin-top: 20px;
   width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column; 
+    align-items: center;    
+  }
 `;
 
 // Estilo para o link "Ver todos"
@@ -133,7 +150,6 @@ const HomePage = () => {
         <Hero slides={HOME_SLIDES} />
 
         <Content>
-          {/* 1. Coleções em destaque (Cards com Botão) */}
           <Section>
             <TitleContainer>
               <h2>Coleções em destaque</h2>
@@ -141,25 +157,20 @@ const HomePage = () => {
             <BannerGrid>
               {COLLECTIONS.map((col, i) => (
                 <CollectionCard key={i}>
-                  {/* 1. Fica apenas o selo de desconto */}
                   <span className="badge">30% OFF</span>
                   
-                  {/* 2. O botão de comprar (Sem o texto da categoria no meio) */}
                   <button>Comprar</button>
                   
-                  {/* 3. A imagem de fundo */}
                   <img src={col.image} alt="Coleção" />
                 </CollectionCard>
               ))}
             </BannerGrid>
           </Section>
 
-          {/* 2. Categorias (Ícones centralizados) */}
           <Section title="Categorias em destaque" titleAlign="center">
             <CategoryGrid />
           </Section>
 
-          {/* 3. Produtos em Alta (Com link rosa) */}
           <Section>
             <TitleContainer>
               <h2>Produtos em alta</h2>

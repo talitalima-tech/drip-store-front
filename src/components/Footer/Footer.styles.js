@@ -97,6 +97,7 @@ export const Columns = styled.div`
     flex-direction: column; /* Empilha Informação, Categorias e Contato */
     align-items: center;
     gap: 40px; /* Espaço entre as colunas no mobile */
+  }
 `;
 
 export const ColumnInfo = styled.div`

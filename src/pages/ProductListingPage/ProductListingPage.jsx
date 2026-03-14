@@ -6,17 +6,41 @@ import { PRODUCTS } from "../../data/db";
 
 const Container = styled.div`
   display: flex;
+  flex-direction: row; /* Lado a lado no desktop */
   padding: 40px 100px;
   background-color: #F5F5F5;
   gap: 30px;
+
+  /* Tablet (iPad) */
+  @media (max-width: 1024px) {
+    padding: 30px 40px;
+    gap: 20px;
+  }
+
+  /* Celular */
+  @media (max-width: 768px) {
+    flex-direction: column; /* Filtro vai para cima dos produtos */
+    padding: 20px;
+    gap: 20px;
+  }
 `;
 
 const Sidebar = styled.aside`
-  width: 308px; 
+  width: 308px;
+  flex-shrink: 0; /* Impede que o filtro esmague no desktop */
+
+  @media (max-width: 1024px) {
+    width: 250px; /* Reduz um pouco no tablet */
+  }
+
+  @media (max-width: 768px) {
+    width: 100%; /* Ocupa tudo no celular */
+  }
 `;
 
 const Content = styled.section`
-  flex: 1; 
+  flex: 1;
+  width: 100%;
 `;
 
 const TopContent = styled.div`
@@ -24,14 +48,33 @@ const TopContent = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+
+  h4 {
+    font-size: 16px;
+    color: #474747;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    
+    h4 {
+      font-size: 14px;
+    }
+  }
 `;
 
 const OrderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  
   label {
     font-size: 16px;
     font-weight: 700;
     color: #474747;
     margin-right: 10px;
+    white-space: nowrap;
   }
 
   select {
@@ -40,10 +83,16 @@ const OrderContainer = styled.div`
     border: 1px solid #474747;
     border-radius: 4px;
     padding: 0 15px;
-    font-size: 16px;
-    color: #474747;
     background-color: transparent;
-    cursor: pointer;
+
+    @media (max-width: 1024px) {
+      width: 220px; /* Ajuste para tablets */
+    }
+
+    @media (max-width: 768px) {
+      width: 100%; /* Ocupa a largura total no mobile */
+      height: 48px;
+    }
   }
 `;
 
@@ -65,15 +114,24 @@ const FilterBox = styled.div`
 `;
 
 const ProductsGrid = styled.div`
+  /* O segredo da responsividade dos produtos está aqui */
   display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas por padrão */
   gap: 20px;
+
+  @media (max-width: 1150px) {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr); /* 1 coluna em celulares pequenos */
+  }
 `;
 
 const ProductListingPage = () => {
   return (
     <Layout>
       <Container>
-        {/* filtros */}
         <Sidebar>
           <FilterBox>
             <h3>Filtrar por</h3>
@@ -96,10 +154,9 @@ const ProductListingPage = () => {
           </FilterBox>
         </Sidebar>
 
-        {/* Ordenação e Produtos */}
         <Content>
           <TopContent>
-            <h4 style={{color: '#474747'}}>Resultados para "Tênis" - {PRODUCTS.slice(0, 15).length} produtos</h4>
+            <h4>Resultados para "Tênis" - {PRODUCTS.slice(0, 15).length} produtos</h4>
             
             <OrderContainer>
               <label>Ordenar por:</label>

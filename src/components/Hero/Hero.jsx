@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
-// Imports dos Assets - Verifique se os arquivos estão na pasta assets
 import sneakerImage from '../../assets/White-Sneakers-PNG.png';
 import fireIcon from '../../assets/fire.png';
 import dotsImage from '../../assets/dots.png';
@@ -19,7 +18,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 2000); // Muda a cada 2 segundos
+    }, 4000); // 4 segundos para dar tempo de ler
     return () => clearInterval(interval);
   }, [slides.length]);
 
@@ -53,7 +52,6 @@ const Hero = () => {
             key={index} 
             $active={index === currentSlide} 
             onClick={() => setCurrentSlide(index)}
-            aria-label={`Ir para slide ${index + 1}`}
           />
         ))}
       </DotsContainer>
@@ -63,15 +61,22 @@ const Hero = () => {
 
 export default Hero;
 
-// Estilos para o Hero
+// --- ESTILOS RESPONSIVOS ---
+
 const HeroWrapper = styled.section`
   position: relative;
   width: 100%;
-  height: 681px;
+  min-height: 500px;
+  height: 80vh; /* Altura dinâmica em vez de fixa 681px */
   background-color: #F5F5F5;
   overflow: hidden;
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 60px 0;
+  }
 `;
 
 const Content = styled.div`
@@ -79,49 +84,63 @@ const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1216px;
   margin: 0 auto;
   padding: 0 100px;
-  position: relative;
+
+  @media (max-width: 1024px) {
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse; /* Imagem em cima, texto embaixo no mobile */
+    padding: 0 20px;
+    text-align: center;
+  }
 `;
 
 const TextContent = styled.div`
-  width: 550px; /* Aumentado levemente para acomodar o fogo de 50px */
+  max-width: 550px;
   z-index: 10;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 
   span.subtitle {
     color: ${theme.colors.warning || '#E7BB1F'};
     font-weight: bold;
     font-size: 16px;
-    display: block;
     margin-bottom: 10px;
+    display: block;
   }
 
   h1 {
     font-size: 64px;
     font-weight: 800;
     line-height: 1.1;
-    color: ${theme.colors.neutral.darkGray};
-    margin: 0 0 20px 0;
-    /* O display padrão do h1 permite que o inline-block da imagem funcione ao lado */
+    color: #1F1F1F;
+
+    @media (max-width: 480px) {
+      font-size: 40px; /* Reduz tamanho no celular 363px */
+    }
   }
 
   .fire-img {
-    width: 50px;
-    height: 50px;
-    display: inline-block; /* Força o fogo a ficar na linha do texto */
-    vertical-align: middle; /* Alinha com o meio da letra */
-    margin-left: 15px;
-    position: relative;
-    top: -5px; /* Ajuste fino para o fogo subir um pouco */
+    width: 40px;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
   }
 
   p.desc {
     font-size: 18px;
     line-height: 28px;
-    color: ${theme.colors.neutral.mediumGray || '#666'};
-    margin-bottom: 40px;
-    min-height: 56px;
+    color: #666;
+    margin: 20px 0 40px;
+    /* Animação simples de fade ao trocar o texto */
+    animation: fadeIn 0.8s ease-in-out;
   }
 
   button {
@@ -132,19 +151,32 @@ const TextContent = styled.div`
     border-radius: 8px;
     font-weight: bold;
     font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-    &:hover { filter: brightness(1.1); }
+    width: auto;
+
+    @media (max-width: 480px) {
+      width: 100%; /* Botão ocupa tudo no mobile */
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 `;
 
 const ImageContainer = styled.div`
   position: relative;
-  width: 733px;
-  height: 431px;
+  width: 50%; /* Dinâmico */
+  max-width: 733px;
+
+  @media (max-width: 768px) {
+    width: 80%;
+    margin-bottom: 40px;
+  }
 
   .sneaker {
     width: 100%;
+    height: auto;
     transform: rotate(-19.34deg);
     position: relative;
     z-index: 2;
@@ -152,22 +184,21 @@ const ImageContainer = styled.div`
 
   .dots {
     position: absolute;
-    top: -40px;
-    right: -50px;
-    width: 140px;
+    top: -20px;
+    right: -20px;
+    width: 100px;
     z-index: 1;
-    opacity: 0.8;
+    opacity: 0.5;
   }
 `;
 
 const DotsContainer = styled.div`
   position: absolute;
-  bottom: 40px;
+  bottom: 30px;
   left: 50%;
-  transform: translateX(-50%); /* Centraliza as bolinhas no meio da tela */
+  transform: translateX(-50%);
   display: flex;
   gap: 12px;
-  z-index: 15;
 `;
 
 const Dot = styled.button`
@@ -175,9 +206,6 @@ const Dot = styled.button`
   height: 12px;
   border-radius: 50%;
   border: none;
-  /* Cor rosa (primary) se ativo, cinza se inativo */
   background-color: ${props => props.$active ? theme.colors.primary : '#CCCCCC'};
-  transition: all 0.3s ease;
   cursor: pointer;
 `;
-

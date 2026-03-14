@@ -1,11 +1,18 @@
 import styled from "styled-components";
 import StarRating from "../StarRating/StarRating";
-//Estilo do buybox
+
+// Estilo do buybox
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
+  width: 100%;
   max-width: 450px;
+  padding: 0; /* Remove paddings internos que podem apertar o conteúdo */
+
+  @media (max-width: 363px) {
+    gap: 10px; /* Diminui o espaçamento em telas muito pequenas */
+  }
 `;
 
 const Name = styled.h1`
@@ -13,6 +20,10 @@ const Name = styled.h1`
   color: #1F1F1F; 
   font-weight: 700;
   line-height: 1.2;
+
+  @media (max-width: 480px) {
+    font-size: 24px; /* Diminui a fonte para o título não ocupar a tela toda */
+  }
 `;
 
 const Reference = styled.p`
@@ -21,38 +32,21 @@ const Reference = styled.p`
   letter-spacing: 0.5px;
 `;
 
-const RatingContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  .stars {
-    background-color: #F6AA1C; 
-    color: white;
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 900;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .rating-total {
-    color: #8F8F8F; 
-    font-size: 14px;
-  }
-`;
-
 const PriceWrapper = styled.div`
   display: flex;
-  align-items: baseline; /* Alinha os preços pela base do texto */
+  flex-wrap: wrap; /* Caso o preço seja grande, ele quebra linha em vez de sumir */
+  align-items: baseline;
   gap: 10px;
+  margin-top: 5px;
 
   .current-price {
     font-size: 32px;
     color: #474747;
     font-weight: 700;
+
+    @media (max-width: 480px) {
+      font-size: 28px;
+    }
   }
 
   .old-price {
@@ -66,11 +60,16 @@ const Description = styled.p`
   font-size: 14px;
   color: #474747;
   line-height: 22px;
-  margin: 10px 0;
+  margin: 5px 0;
+
+  @media (max-width: 480px) {
+    font-size: 13px;
+    line-height: 20px;
+  }
 `;
 
 const BuyButton = styled.button`
-  width: 100%;
+  width: 220px; /* Largura padrão desktop */
   height: 48px;
   background-color: #F6AA1C; 
   color: white;
@@ -85,11 +84,17 @@ const BuyButton = styled.button`
   &:hover {
     background-color: #E59810;
   }
-  width: 220px; 
-  
+
+  /* Ajuste crucial para telas de 363px */
   @media (max-width: 768px) {
-    width: 100%; /* No mobile ele fica gigante para facilitar o clique */
+    width: 100%; /* Botão ocupa a largura total para facilitar o toque */
+    height: 54px; /* Um pouco mais alto no mobile para melhor ergonomia */
   }
+`;
+
+const OptionsWrapper = styled.div`
+  margin: 15px 0;
+  width: 100%;
 `;
 
 // Componente BuyBox
@@ -97,8 +102,9 @@ const BuyBox = ({ name, reference, stars, rating, price, priceDiscount, descript
   return (
     <Container>
       <Name>{name}</Name>
-      <Reference>Ref:{reference}</Reference>
+      <Reference>Ref: {reference}</Reference>
 
+      {/* StarRating precisa ser internamente responsivo também */}
       <StarRating rating={stars} totalReviews={rating} />
 
       <PriceWrapper>
@@ -114,10 +120,10 @@ const BuyBox = ({ name, reference, stars, rating, price, priceDiscount, descript
 
       <Description>{description}</Description>
 
-      {/* Espaço para o ProductOptions (Tamanhos e Cores) */}
-      <div style={{ margin: '20px 0' }}>
+      {/* Container para tamanhos e cores */}
+      <OptionsWrapper>
         {children}
-      </div>
+      </OptionsWrapper>
 
       <BuyButton>Comprar</BuyButton>
     </Container>
@@ -125,4 +131,3 @@ const BuyBox = ({ name, reference, stars, rating, price, priceDiscount, descript
 };
 
 export default BuyBox;
-

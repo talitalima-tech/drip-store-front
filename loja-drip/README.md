@@ -1,16 +1,47 @@
-# React + Vite
+# 👟 Drip Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[](https://drip-store-digital.vercel.app/)
+[](https://reactjs.org/)
+[](https://tailwindcss.com/)
 
-Currently, two official plugins are available:
+E-commerce moderno construído com **React** e **TailwindCSS**. O projeto foca em componentização reutilizável, gerenciamento de estado global e interface totalmente responsiva baseada no Figma.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Funcionalidades
 
-## React Compiler
+  * **Home:** Carrossel automático e vitrine de produtos em destaque.
+  * **Catálogo:** Listagem com filtros funcionais por categoria, marca, gênero e estado.
+  * **Produto:** Página de detalhes com seleção de atributos (cor/tamanho) e galeria.
+  * **Carrinho:** Gerenciamento de itens com persistência em `localStorage`.
+  * **Responsividade:** Layout *mobile-first* otimizado para resoluções a partir de **360px**.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Stack Técnica
 
-## Expanding the ESLint configuration
+  * **Core:** React.js (Vite)
+  * **Roteamento:** React Router DOM
+  * **Estilização:** TailwindCSS
+  * **Estado:** Context API
+  * **Ícones:** Lucide React / React Icons
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🔧 Instalação e Uso
+
+```bash
+# Clone o repositório
+git clone https://github.com/talitalima-tech/drip-store-front.git
+
+# Instale as dependências
+npm install
+
+# Inicie o ambiente de desenvolvimento
+npm run dev
+```
+
+-----
+
+## ☁️ Deploy & Environments
+
+O projeto está configurado para deploy contínuo em:
+
+  * **Vercel** (Link oficial acima)
+  * Compatível com Netlify, Railway e Firebase.
+
+-----
